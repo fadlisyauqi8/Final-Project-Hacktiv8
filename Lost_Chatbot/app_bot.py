@@ -18,14 +18,14 @@ data_file = open('Lost_Chatbot/intents.json').read()
 intents_json = json.loads(data_file)
 
 # Load TF model
-model = load_model('Lost_Chatbot/model.h5')
+model = load_model('Lost_Chatbot\model.tf')
 
 # Load Label Encoder
-with open('encoder.pkl', 'rb') as f:
+with open('Lost_Chatbot\encoder.pkl', 'rb') as f:
     encoder = pickle.load(f)
 
 # Load text vectorization
-from_disk = pickle.load(open('vect.pkl', 'rb'))
+from_disk = pickle.load(open('Lost_Chatbot/vect.pkl', 'rb'))
 vect = tf.keras.layers.TextVectorization.from_config(from_disk['config'])
 
 vect.adapt(tf.data.Dataset.from_tensor_slices(["xyz"]))
@@ -68,7 +68,7 @@ def bot_response(text):
     # print(dict_temp)
     # print(encoder.classes_[pred.argmax()])
 
-    return print(np.random.choice(responses))
+    return np.random.choice(responses)
 
 #######################################################
 
